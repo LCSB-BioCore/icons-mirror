@@ -15,6 +15,7 @@ print("""<!doctype html>
 <h1> Twemoji browsable listing </h1>
 <p><strong>How-to</strong>: use Ctrl+F to find your favorite emoji by name.</p>
 <p>All data on this page is generated from Twitter Twemoji, subject to the <a href="https://github.com/twitter/twemoji">corresponding license terms</a>.</p>
+<p>To include this in HTML, use the CSS from a <a href="twemoji-amazing.css">local mirror</a> of the <a href="https://github.com/SebastianAigner/twemoji-amazing">Twemoji-Amazing</a> repo by Sebastian Aigner.</p>
 <table>
 """)
 

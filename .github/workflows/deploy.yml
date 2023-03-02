@@ -23,6 +23,7 @@ jobs:
           mkdir public
           mv index.html public
           mv twemoji/assets public
+          mv twemoji-amazing.css public
       - name: Push the website to gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
