@@ -1,0 +1,36 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the repo
+        uses: actions/checkout@v3
+      - name: Clone the source icons
+        run: |
+          git clone https://github.com/twitter/twemoji.git twemoji
+          cd twemoji
+          git checkout v14.0.2
+      - name: Build the browsable HTML
+        run: |
+          cd twemoji
+          ../genindex.py > ../index.html
+      - name: Assemble the website
+        run: |
+          mkdir public
+          mv index.html public
+          mv twemoji/assets public
+      - name: Push the website to gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd public
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          GIT_WORK_TREE=. git checkout --orphan gh-pages
+          GIT_WORK_TREE=. git add .
+          GIT_WORK_TREE=. git commit -m 'pages'
+          git push --force --set-upstream origin gh-pages
